@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/config";
@@ -9,6 +10,8 @@ import { auth } from "../../firebase/config";
 import { CustomBtn } from "./CustomBtn";
 import { SubmitButton } from "./SubmitBtn";
 import { TextInput } from "./TextInput";
+
+import { getRedirectRes, signInWithGoogle } from "../../firebase/authFunctions";
 
 export function SignUpForm() {
     const router = useRouter()
@@ -30,7 +33,17 @@ export function SignUpForm() {
         }
         
     }
-
+    useEffect(() => {
+      // Checking the google sign in after it returns from the redirected page
+      async function checkForSignIn() {
+        const res = await getRedirectRes();
+        if (res?.token) {
+          sessionStorage.setItem("user", true);
+          router.push("/me");
+        }
+      }
+      checkForSignIn();
+    }, []);
   return (
     <section className="flex flex-col justify-center items-center h-screen">
       <h1 className="mb-[40px] font-semibold text-specifics">
@@ -65,7 +78,7 @@ export function SignUpForm() {
             href="##"
             onClick={(e) => {
               e.preventDefault();
-              signIn("google", { callbackUrl: "/me" });
+              signInWithGoogle(); // Initiate the google sign up
             }}
           >
             <CustomBtn>

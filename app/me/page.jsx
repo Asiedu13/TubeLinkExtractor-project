@@ -10,28 +10,28 @@ export default function Page() {
   const router = useRouter();
   const userSession = sessionStorage.getItem( 'user' );
 
+  const handleSignOut = async () => {
+    try {
+      const res = await signOut(auth);
+      console.log(res);
+      sessionStorage.removeItem("user", false);
+    } catch (e) {
+      console.log(`Er ${e}`);
+    }
+  }; 
   if (!user && !userSession) {
     console.log( user );
     router.push("/login");
   }
-
-  const handleSignOut = async () => {
-    try {
-      const res = await signOut(auth);
-      console.log( res )
-      sessionStorage.removeItem('user', false);
-    } catch ( e ) {
-      console.log( `Er ${e}` );
-    }
-  } 
-
+else {
   return (
     <main className="">
       This is the user dashboard page
       <div>some</div>
       <div onClick={handleSignOut}>
-        Logoot
+        Logout
       </div>
     </main>
   );
+}
 }
