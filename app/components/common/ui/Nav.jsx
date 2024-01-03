@@ -1,8 +1,6 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-// import { Button } from "./common/ui/Button";
 
 export function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +13,7 @@ export function NavBar() {
   };
   return (
     <>
-      <nav className="bg-secondary min-w-full h-[100px] lg:h-[169px] lg:px-[110px] py-[10px] flex justify-between lg:justify-around items-center box-border">
+      <nav className="bg-background text-specifics min-w-full h-[100px] lg:h-[50px] lg:px-[110px] py-[10px] flex justify-between lg:justify-around items-center box-border border-accent">
         <Link href="/">
           {/* <Image
             src=""
@@ -24,6 +22,8 @@ export function NavBar() {
             width="100"
             height="100"
           /> */}
+          <span className="text-xl">Play</span>
+          <span className="font-bold text-xl">Listor</span>
         </Link>
         <div
           className="cursor-pointer z-20 lg:hidden px-5 lg:px-0"
@@ -96,13 +96,11 @@ export function NavBar() {
               Contact
             </Link>
           </li>
-          <div>
-            {/* <Button label="Donate" /> */}
-          </div>
+          <div>{/* <Button label="Donate" /> */}</div>
         </ul>
       </nav>
 
-      <hr className="border-1 border-slate-400" />
+      <hr className="border-1 border-secondary" />
     </>
   );
 }

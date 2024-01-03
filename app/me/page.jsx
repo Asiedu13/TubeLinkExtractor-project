@@ -25,12 +25,20 @@ export default function Page() {
   }
 else {
   return (
-    <main className="">
-      This is the user dashboard page
-      <div>some</div>
-      <div onClick={handleSignOut}>
-        Logout
-      </div>
+    <main className="px-[110px]">
+      <header className="px-[100px] mt-[100px]">
+        <h1 className="text-3xl">
+          Welcome <f className="text-accent">Name</f>
+        </h1>
+        <p className="text-sm text-accent">
+          Choose from the manifold services to extract from
+        </p>
+      </header>
+
+      <section className="px-[100px] my-10 grid grid-cols-3">
+        <article className="w-[300px] h-[300px] rounded-md shadow-sm bg-[#fff]"></article>
+        <article className="w-[300px] h-[300px] rounded-md shadow-sm bg-[#fff]"></article>
+      </section>
     </main>
   );
 }
